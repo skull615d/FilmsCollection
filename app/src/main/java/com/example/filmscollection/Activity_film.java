@@ -77,17 +77,19 @@ public class Activity_film extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-//        CheckBox mCheckBox = findViewById(R.id.like);
+    public void onBackPressed() {
+
+        CheckBox mCheckBox = findViewById(R.id.like);
         EditText mComment = findViewById(R.id.comment);
 
-//        String check = String.valueOf(mCheckBox.isChecked());
+        String check = String.valueOf(mCheckBox.isChecked());
         String text = mComment.getText().toString();
-        Bundle mBundle = new Bundle();
-//        mBundle.putString("CheckBox",check);
-        mBundle.putString("Comment", text);
-        Log.d(TAG, "активировался onStop");
+        Intent mAnswerIntent = new Intent();
+
+        mAnswerIntent.putExtra("CHECKBOX",check);
+        mAnswerIntent.putExtra("COMMENT", text);
+        setResult(RESULT_CANCELED,mAnswerIntent);
+        finish();
         }
 
     }

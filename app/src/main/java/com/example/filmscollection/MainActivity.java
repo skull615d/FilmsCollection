@@ -1,6 +1,7 @@
 package com.example.filmscollection;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -15,12 +16,14 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyApp";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final int SEC_AKT = 0;
 
         Button mButton_1 = findViewById(R.id.B_1);
         Button mButton_2 = findViewById(R.id.B_2);
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(view.getContext(),Activity_film.class);
                 intent.putExtra("id",1);
-                view.getContext().startActivity(intent);
+                startActivityForResult(intent,SEC_AKT);
             }
         });
         mButton_2.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(view.getContext(),Activity_film.class);
                 intent.putExtra("id",2);
-                view.getContext().startActivity(intent);
+                startActivityForResult(intent,SEC_AKT);
             }
         });
         mButton_3.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(view.getContext(),Activity_film.class);
                 intent.putExtra("id",3);
-                view.getContext().startActivity(intent);
+                startActivityForResult(intent,SEC_AKT);
             }
         });
         mButton_4.setOnClickListener(new View.OnClickListener() {
@@ -84,28 +87,25 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(view.getContext(),Activity_film.class);
                 intent.putExtra("id",4);
-                view.getContext().startActivity(intent);
-
+                startActivityForResult(intent,SEC_AKT);
             }
         });
 
         Log.d(TAG,"Снова включился onCreate");
+
+
     }
 
     @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        String comment = savedInstanceState.getString("Comment");
-        Log.d(TAG, "  Comment: " + comment);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0){
+            if (resultCode == RESULT_CANCELED){
+                String Check = data.getStringExtra("CHECKBOX");
+                String Comment = data.getStringExtra("COMMENT");
 
+                Log.d(TAG,"Checkbox: "+Check+", Comment: "+Comment);
+            }
+        }
     }
-
-    protected void onResume() {
-        super.onResume();
-
-            Log.d(TAG, "Включился onResume");
-
-    }
-
-
 }
