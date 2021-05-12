@@ -1,12 +1,15 @@
 package com.example.filmscollection;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,6 +26,12 @@ public class Activity_film extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
         Bundle mArg = getIntent().getExtras();
         int id = mArg.getInt("id");
         ImageView mImage = findViewById(R.id.image);
@@ -36,24 +45,28 @@ public class Activity_film extends AppCompatActivity {
                 mText.setText(R.string.text_film_1);
                 mName.setText(R.string.film_1);
                 stringShare = getResources().getString(R.string.film_1);
+                toolbar.setTitle(R.string.film_1);
             }
             if (id==2){
                 mImage.setImageDrawable(getApplicationContext().getDrawable(R.drawable.f_2));
                 mText.setText(R.string.text_film_2);
                 mName.setText(R.string.film_2);
                 stringShare = getResources().getString(R.string.film_2);
+                toolbar.setTitle(R.string.film_2);
             }
             if (id==3){
                 mImage.setImageDrawable(getApplicationContext().getDrawable(R.drawable.f_3));
                 mText.setText(R.string.text_film_3);
                 mName.setText(R.string.film_3);
                 stringShare = getResources().getString(R.string.film_3);
+                toolbar.setTitle(R.string.film_3);
             }
             if (id==4){
                 mImage.setImageDrawable(getApplicationContext().getDrawable(R.drawable.f_4));
                 mText.setText(R.string.text_film_4);
                 mName.setText(R.string.film_4);
                 stringShare = getResources().getString(R.string.film_4);
+                toolbar.setTitle(R.string.film_4);
             }
 
         }
@@ -74,6 +87,10 @@ public class Activity_film extends AppCompatActivity {
                 }
             }
         });
+    }
+    public boolean onSupportNavigateUp(){
+        onBackPressed();
+        return true;
     }
 
     @Override

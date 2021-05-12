@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyApp";
     ArrayList<Button> arrButton = new ArrayList<Button>();
     ArrayList<TextView> arrTextView = new ArrayList<TextView>();
+    final int SEC_AKT = 0;
+    final int ADD_ACT = 1;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main,menu);
@@ -43,15 +46,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        final int SEC_AKT = 0;
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //Button button_1 = findViewById(R.id.B_1);
-        Button button_2 = findViewById(R.id.B_2);
-        Button button_3 = findViewById(R.id.B_3);
-        Button button_4 = findViewById(R.id.B_4);
 
         arrButton.add(findViewById(R.id.B_1));
         arrButton.add(findViewById(R.id.B_2));
@@ -63,23 +61,14 @@ public class MainActivity extends AppCompatActivity {
         arrTextView.add(findViewById(R.id.name_3));
         arrTextView.add(findViewById(R.id.name_4));
 
-        LinearLayout main_layout = findViewById(R.id.main_linear);
-        LinearLayout linearLayout = new LinearLayout(this);
-        TextView tv = new TextView(this);
-        tv.setText("New text View");
-        tv.setTextColor(Color.RED);
-        linearLayout.addView(tv);
-        main_layout.addView(linearLayout);
-
         View.OnClickListener push = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 for(int i = 0; i<arrButton.size(); i++)  {
                     if (view.getId() == arrButton.get(i).getId()){
-                        arrTextView.get(0).setTextColor(getColor(R.color.my_white));
-                        arrTextView.get(1).setTextColor(getColor(R.color.my_white));
-                        arrTextView.get(2).setTextColor(getColor(R.color.my_white));
-                        arrTextView.get(3).setTextColor(getColor(R.color.my_white));
+                        for(int y = 0;y < arrTextView.size();y++){
+                            arrTextView.get(y).setTextColor(getColor(R.color.my_white));
+                        }
                         arrTextView.get(i).setTextColor(getColor(R.color.my_blue));
                         Intent intent = new Intent(view.getContext(),Activity_film.class);
                         intent.putExtra("id",i+1);
@@ -106,6 +95,13 @@ public class MainActivity extends AppCompatActivity {
             snackbar.show();
             return true;
         }
+        if (id == R.id.add_film){
+            View main_linear = findViewById(R.id.main_linear);
+            //setContentView(R.layout.add_film);
+            Intent intent = new Intent(main_linear.getContext(),AddFilm.class);
+            startActivityForResult(intent,ADD_ACT);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
     @Override
@@ -118,6 +114,20 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d(TAG,"Checkbox: "+Check+", Comment: "+Comment);
             }
+        }
+        if ((requestCode == ADD_ACT) && (resultCode == RESULT_OK)){
+            String name = data.getStringExtra("Name");
+            String discr = data.getStringExtra("Discr");
+
+            LinearLayout subLinear = findViewById(R.id.subLinear);
+            LinearLayout linearLayout = new LinearLayout(this);
+            LinearLayout.LayoutParams container_Params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            container_Params.leftMargin= 16;
+            TextView tv = new TextView(this);
+            tv.setText(name);
+            tv.setTextColor(Color.RED);
+            linearLayout.addView(tv);
+            subLinear.addView(linearLayout);
         }
     }
 }

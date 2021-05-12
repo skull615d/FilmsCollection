@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/linear_background">
+    android:orientation="vertical"
+    android:id="@+id/main_linear"
+
+    android:background="@color/my_grey_background">
+<androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        style="@style/Theme.FilmsCollection"
+        app:titleTextColor="@color/my_white"
+        app:subtitleTextColor="@color/my_white"
+        app:title="@string/app_name"
+        android:id="@+id/toolbar"/>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContentActivity">
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-
+    android:id="@+id/subLinear"
     >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/linear"
+            android:background="@color/my_grey_linear"
             android:padding="5dp"
             android:layout_margin="5dp">
             <ImageView
@@ -34,7 +49,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/film_1"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/my_white"/>
                 <Button
                     android:id="@+id/B_1"
                     android:layout_width="wrap_content"
@@ -46,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="#202020"
+            android:background="@color/my_grey_linear"
             android:padding="5dp"
             android:layout_margin="5dp">
             <ImageView
@@ -63,7 +78,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/film_2"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/my_white"/>
                 <Button
                     android:id="@+id/B_2"
                     android:layout_width="wrap_content"
@@ -75,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="#202020"
+            android:background="@color/my_grey_linear"
             android:padding="5dp"
             android:layout_margin="5dp">
             <ImageView
@@ -92,7 +107,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/film_3"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/my_white"/>
                 <Button
                     android:id="@+id/B_3"
                     android:layout_width="wrap_content"
@@ -104,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="#202020"
+            android:background="@color/my_grey_linear"
             android:padding="5dp"
             android:layout_margin="5dp">
             <ImageView
@@ -121,7 +136,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/film_4"
                     android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/my_white"/>
                 <Button
                     android:id="@+id/B_4"
                     android:layout_width="wrap_content"
@@ -131,3 +146,4 @@
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
+</LinearLayout>
